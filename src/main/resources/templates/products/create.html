@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Create</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <h3>Products Create</h3>
+        <a th:href="@{/products}" class="btn btn-primary">Products</a>
+    </div>
+
+    <hr>
+
+    <div style="max-width:400px;" class="me-auto card">
+        <div class="card-header bg-primary text-white">
+            Create New Product
+        </div>
+        <div class="card-body">
+            <form th:action="@{/products/store}" method="post" th:object="${product}">
+                <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                    <ul class="mb-0">
+                        <li th:each="error : ${#fields.allErrors()}" th:text="${error}"></li>
+                    </ul>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="Product Name..."
+                           th:field="*{name}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="price" placeholder="Product Price..."
+                           th:field="*{price}">
+                </div>
+                <div class="">
+                    <input type="submit" value="Create" class="w-100 btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
