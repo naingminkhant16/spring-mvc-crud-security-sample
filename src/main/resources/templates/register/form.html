@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-5">
+    <div class="card" style="max-width:400px">
+        <div class="card-header bg-primary text-white">
+            Registration Form
+        </div>
+        <div class="card-body">
+            <form th:action="@{/register/process}" th:object="${webUser}" method="post">
+                <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                    <ul class="mb-0">
+                        <li th:each="error : ${#fields.allErrors()}" th:text="${error}"></li>
+                    </ul>
+                </div>
+                <p class="text-danger" th:if="${emailAlreadyUsedError}"
+                   th:text="'*'+${emailAlreadyUsedError}"></p>
+
+                <input type="text" name="name" class="form-control mb-3" placeholder="Enter your name...">
+                <input type="text" name="email" class="form-control mb-3" placeholder="Enter your email...">
+                <input type="text" name="password" class="form-control mb-3" placeholder="Enter your password...">
+                <input type="submit" value="Register" class="w-100 btn btn-primary">
+            </form>
+        </div>
+        <div class="card-footer">
+            <a th:href="@{/login}">Login Now.</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

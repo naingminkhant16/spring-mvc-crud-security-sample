@@ -3,6 +3,7 @@ package com.moe.demo.dao;
 import com.moe.demo.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -31,5 +32,11 @@ public class UserDaoImpl implements UserDao {
         }
 
         return user;
+    }
+
+    @Override
+    @Transactional
+    public void save(User user) {
+        entityManager.merge(user);
     }
 }

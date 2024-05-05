@@ -15,6 +15,11 @@
             Sign in as - <span sec:authentication="principal.username"></span>&nbsp;
             <span sec:authentication="principal.authorities"></span>
         </p>
+        <p class="text-black-50 fst-italic" th:if="${session}">
+            Sign in as - <span th:text="${session.auth.name}"></span>&nbsp;
+            <span th:text="${session.auth.email}"></span> (Auth Object from session)
+        </p>
+
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Logout" class="btn btn-danger btn-sm"/>
         </form>
